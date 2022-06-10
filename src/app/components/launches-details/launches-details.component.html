@@ -1,0 +1,84 @@
+<div class="launches-container" *ngIf="launch && rocket && launchpad">
+  <section class="header">
+    <div class="row">
+      <div class="col-1">
+        <div [routerLink]="''" class="back-icon"></div>
+      </div>
+      <div class="col-4 launch-header">
+        Szczegóły lotu #{{launch.flight_number}}
+      </div>
+    </div>
+  </section>
+  <section class="launches-list">
+    <div class="row">
+      <div class="col-6">
+        <div class="launch-wrapper">
+          <div class="launch-info">
+            <div>Lot: </div>
+            <div>{{launch.name}}</div>
+          </div>
+          <div class="launch-info">
+            <div>Data lotu: </div>
+            <div>{{date}}</div>
+          </div>
+          <div class="launch-info">
+            <div>Status: </div>
+            <div>{{success}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="launch-wrapper">
+          <div class="launch-info">
+            <div>Załoga: </div>
+            <div>{{launch.crew.length}}</div>
+          </div>
+          <div class="launch-info">
+            <div>Rakieta: </div>
+            <div>{{rocket.name}}</div>
+          </div>
+          <div class="launch-info">
+            <div>Start: </div>
+            <div>{{launchpad.name}}, {{launchpad.locality}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 launch-wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div *ngIf="launch.links.flickr.original.length" id="carouselExampleIndicators"
+              class="carousel-slide carousel-fade" data-mdb-ride="carousel">
+              <div class="carousel-inner mb-5">
+                <div *ngFor="let image of launch.links.flickr.original; let i = index" class="carousel-item">
+                  <img src="{{image}}" />
+                </div>
+              </div>
+              <div class="thumbnails-container">
+                <div class="carousel-thumbnails">
+                  <div (click)="slideLeft()">
+                    <div class="prev-icon"></div>
+                  </div>
+                  <div *ngFor="let image of launch.links.flickr.original; let i = index"
+                    data-mdb-target="#carouselExampleIndicators" class="active" aria-current="true" (click)="show(i)">
+                    <img src="{{image}}" class="img-fluid" />
+                  </div>
+                </div>
+                <div (click)="slideRight()">
+                  <div class="next-icon"></div>
+                </div>
+              </div>
+              <div class="numbers">{{photoNumber}}/{{launch.links.flickr.original.length}}</div>
+            </div>
+            <div *ngIf="!launch.links.flickr.original.length" style="text-align: center">Brak zdjęć</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 launch-wrapper">
+      <div *ngIf="launch.details">{{launch.details}}</div>
+      <div *ngIf="!launch.details">Lorem ipsum</div>
+    </div>
+  </section>
+</div>
