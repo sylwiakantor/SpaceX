@@ -66,8 +66,8 @@ export class LaunchesDetailsComponent implements OnInit {
     )
   }
 
-  ngAfterViewInit() {
-    setTimeout(() => {document.querySelectorAll(".carousel-item")[0].classList.add('active')},200)
+  ngAfterViewChecked() {
+    setTimeout(() => {document.querySelectorAll(".carousel-item")[0].classList.add('active')},1000)
   }
 
   slideRight() {
